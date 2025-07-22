@@ -154,7 +154,8 @@ npm start
 ---
 
 ## Screenshots
-_Add screenshots of your app and test coverage here before submission._
+![Bug Tracker Screenshot](assets/WEEK6.PNG)
+
 
 ---
 
