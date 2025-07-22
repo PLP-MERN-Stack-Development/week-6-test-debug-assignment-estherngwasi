@@ -1,88 +1,162 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19964388&assignment_repo_type=AssignmentRepo)
-# Testing and Debugging MERN Applications
+# MERN Bug Tracker
 
-This assignment focuses on implementing comprehensive testing strategies for a MERN stack application, including unit testing, integration testing, and end-to-end testing, along with debugging techniques.
+A full-stack bug tracker application built with the MERN stack (MongoDB, Express, React, Node.js). This project demonstrates comprehensive testing, debugging, and error handling best practices for a modern web application.
 
-## Assignment Overview
+---
 
-You will:
-1. Set up testing environments for both client and server
-2. Write unit tests for React components and server functions
-3. Implement integration tests for API endpoints
-4. Create end-to-end tests for critical user flows
-5. Apply debugging techniques for common MERN stack issues
+## Features
+- Report new bugs
+- View all reported bugs
+- Update bug statuses (open, in-progress, resolved)
+- Delete bugs
+- Robust error handling (frontend and backend)
+- Unit, integration, and end-to-end (E2E) tests
+
+---
 
 ## Project Structure
-
 ```
-mern-testing/
-├── client/                 # React front-end
-│   ├── src/                # React source code
-│   │   ├── components/     # React components
-│   │   ├── tests/          # Client-side tests
-│   │   │   ├── unit/       # Unit tests
-│   │   │   └── integration/ # Integration tests
-│   │   └── App.jsx         # Main application component
-│   └── cypress/            # End-to-end tests
-├── server/                 # Express.js back-end
-│   ├── src/                # Server source code
-│   │   ├── controllers/    # Route controllers
-│   │   ├── models/         # Mongoose models
-│   │   ├── routes/         # API routes
-│   │   └── middleware/     # Custom middleware
-│   └── tests/              # Server-side tests
-│       ├── unit/           # Unit tests
-│       └── integration/    # Integration tests
-├── jest.config.js          # Jest configuration
-└── package.json            # Project dependencies
+week6/
+  client/
+    src/
+      components/
+      tests/
+        unit/
+        integration/
+    cypress/
+  server/
+    src/
+      controllers/
+      models/
+      routes/
+      middleware/
+    tests/
+      unit/
+      integration/
+  jest.config.js
+  README.md
+  Week6-Assignment.md
 ```
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week6-Assignment.md` file
-4. Explore the starter code and existing tests
-5. Complete the tasks outlined in the assignment
+## Setup Instructions
 
-## Files Included
+### Prerequisites
+- Node.js v18 or higher
+- MongoDB Atlas account (or local MongoDB)
 
-- `Week6-Assignment.md`: Detailed assignment instructions
-- Starter code for a MERN application with basic test setup:
-  - Sample React components with test files
-  - Express routes with test files
-  - Jest and testing library configurations
-  - Example tests for reference
+### 1. Clone the Repository
+```
+git clone <your-repo-url>
+cd week6
+```
 
-## Requirements
+### 2. Install Dependencies
+#### Backend
+```
+cd server
+npm install
+```
+#### Frontend
+```
+cd ../client
+npm install
+```
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Basic understanding of testing concepts
+### 3. Configure MongoDB Atlas
+- Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
+- Add your current IP to the Network Access whitelist
+- Create a database user and password
+- Get your connection string (should start with `mongodb+srv://`)
+- In `server/.env`, add:
+  ```
+  MONGO_URI=your-mongodb-atlas-connection-string
+  ```
 
-## Testing Tools
+### 4. Start the Application
+#### Backend
+```
+cd server
+npm start
+```
+#### Frontend
+```
+cd client
+npm start
+```
+- The frontend will open at [http://localhost:3000](http://localhost:3000)
+- The backend runs at [http://localhost:5000](http://localhost:5000)
 
-- Jest: JavaScript testing framework
-- React Testing Library: Testing utilities for React
-- Supertest: HTTP assertions for API testing
-- Cypress/Playwright: End-to-end testing framework
-- MongoDB Memory Server: In-memory MongoDB for testing
+---
 
-## Submission
+## Testing
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+### Backend
+- **Unit & Integration Tests:**
+  ```
+  cd server
+  npm test
+  ```
 
-1. Complete all required tests (unit, integration, and end-to-end)
-2. Achieve at least 70% code coverage for unit tests
-3. Document your testing strategy in the README.md
-4. Include screenshots of your test coverage reports
-5. Demonstrate debugging techniques in your code
+### Frontend
+- **Unit & Integration Tests:**
+  ```
+  cd client
+  npm test
+  ```
 
-## Resources
+### End-to-End (E2E) Tests
+- **Cypress:**
+  ```
+  cd client
+  npx cypress open
+  ```
 
-- [Jest Documentation](https://jestjs.io/docs/getting-started)
-- [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/)
-- [Supertest Documentation](https://github.com/visionmedia/supertest)
-- [Cypress Documentation](https://docs.cypress.io/)
-- [MongoDB Testing Best Practices](https://www.mongodb.com/blog/post/mongodb-testing-best-practices) 
+### Code Coverage
+- Run `npm test -- --coverage` in both `client` and `server` to generate coverage reports.
+- Coverage reports will be available in the `coverage/` folder.
+
+---
+
+## Debugging & Troubleshooting
+
+### Common Issues
+- **Frontend cannot fetch bugs:**
+  - Make sure the backend is running on port 5000.
+  - Ensure `client/package.json` contains: `"proxy": "http://localhost:5000"`
+  - Restart the React app after adding the proxy.
+- **MongoDB Atlas connection errors:**
+  - Double-check your `.env` connection string.
+  - Make sure your IP is whitelisted in Atlas.
+  - Use Node.js v18 or higher.
+  - Remove deprecated options from `mongoose.connect`.
+  - Try `set NODE_OPTIONS=--tls-min-v1.2` if on Windows and see TLS errors.
+- **App not starting:**
+  - Ensure `client/public/index.html` and `client/src/index.js` exist.
+  - Ensure all dependencies are installed.
+
+### Debugging Techniques Used
+- Console logs in both frontend and backend
+- Chrome DevTools for inspecting network requests and React state
+- Node.js inspector for backend debugging
+- React error boundaries for UI error handling
+- Express error middleware for backend error handling
+
+---
+
+## Assignment Deliverables
+- [x] Unit, integration, and E2E tests
+- [x] MongoDB Atlas integration
+- [x] Error handling and debugging
+- [x] Documentation and troubleshooting
+
+---
+
+## Screenshots
+_Add screenshots of your app and test coverage here before submission._
+
+---
+
+## Summary
+This project demonstrates a complete, tested, and debugged MERN stack application. If you encounter any issues, review the troubleshooting section or reach out for help! 
